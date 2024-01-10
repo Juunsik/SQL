@@ -1,0 +1,10 @@
+18. DATETIME에서 DATE로 형 변환
+
+https://school.programmers.co.kr/learn/courses/30/lessons/59414#fn1
+
+SELECT 
+    ANIMAL_ID,
+    NAME,
+    SUBSTR(DATETIME,1,10)
+FROM ANIMAL_INS
+ORDER BY 1
