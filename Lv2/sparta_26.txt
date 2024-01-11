@@ -1,0 +1,11 @@
+26. 입양 시각 구하기(1)
+
+https://school.programmers.co.kr/learn/courses/30/lessons/59412
+
+SELECT
+    DATE_FORMAT(DATETIME, '%H') HOUR,
+    COUNT(1) COUNT
+FROM ANIMAL_OUTS
+WHERE DATE_FORMAT(DATETIME, '%H') BETWEEN 9 AND 20
+GROUP BY 1
+ORDER BY 1
