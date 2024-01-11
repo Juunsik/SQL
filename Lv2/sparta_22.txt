@@ -1,0 +1,15 @@
+22. 조건에 맞는 회원수 구하기
+
+https://school.programmers.co.kr/learn/courses/30/lessons/131535
+
+SELECT
+    COUNT(1) USERS
+FROM
+    (
+    SELECT 
+        USER_ID,
+        AGE,
+        DATE_FORMAT(DATE(JOINED), "%y") JOINED
+    FROM USER_INFO
+    ) a
+WHERE JOINED='21' AND AGE BETWEEN 20 AND 29
