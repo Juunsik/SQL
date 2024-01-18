@@ -1,0 +1,16 @@
+67. 주문량이 많은 아이스크림 조회하기
+
+https://school.programmers.co.kr/learn/courses/30/lessons/133027
+
+SELECT
+    F.FLAVOR
+FROM FIRST_HALF F 
+    INNER JOIN (
+        SELECT 
+            FLAVOR,
+            SUM(TOTAL_ORDER) TOTAL_ORDER
+        FROM JULY
+        GROUP BY 1
+    ) A ON F.FLAVOR=A.FLAVOR
+ORDER BY F.TOTAL_ORDER+A.TOTAL_ORDER DESC
+LIMIT 3
