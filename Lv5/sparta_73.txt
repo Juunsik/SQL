@@ -1,0 +1,25 @@
+73. 입양 시각 구하기(2)
+
+https://school.programmers.co.kr/learn/courses/30/lessons/59413
+
+WITH RECURSIVE CTE AS (
+    SELECT 
+        0 AS HOUR
+    UNION ALL
+    SELECT
+        HOUR + 1
+    FROM CTE
+    WHERE HOUR < 23
+), ANIMAL_OUTS_TEMP AS (
+    SELECT
+        HOUR(DATETIME) HOUR,
+        COUNT(1) COUNT
+    FROM ANIMAL_OUTS
+    GROUP BY 1
+    ORDER BY 1
+)
+SELECT 
+    CTE.HOUR,
+    IF(A.COUNT IS NULL, 0, A.COUNT) COUNT
+FROM CTE LEFT JOIN ANIMAL_OUTS_TEMP A ON CTE.HOUR=A.HOUR
+ORDER BY 1
