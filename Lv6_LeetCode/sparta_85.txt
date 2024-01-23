@@ -1,0 +1,7 @@
+85. Rising Temperature
+
+https://leetcode.com/problems/rising-temperature/description/
+
+select c.id
+from weather y left join weather c on date_Add(y.recorddate,interval 1 day)=c.recorddate
+where (datediff(c.recorddate,y.recorddate)=1 and y.temperature<c.temperature)
