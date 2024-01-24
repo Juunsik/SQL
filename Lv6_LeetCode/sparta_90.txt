@@ -1,0 +1,20 @@
+90. Confirmation Rate
+
+https://leetcode.com/problems/confirmation-rate/description/
+
+with confirmed_table as (
+    select user_id, count(1) cnt_confirmed
+    from confirmations
+    where action='confirmed'
+    group by 1
+), total as (
+    select user_id, count(1) cnt_total
+    from confirmations
+    group by 1
+)
+select a.user_id, if(cnt_confirmed is null, 0,round(cnt_confirmed/cnt_total, 2)) confirmation_rate
+from (
+    select s.user_id, cnt_confirmed
+    from signups s 
+    left join confirmed_table c on s.user_id=c.user_id) a
+    left join total t on a.user_id=t.user_id
