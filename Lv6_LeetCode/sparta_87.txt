@@ -1,0 +1,13 @@
+87. Emplotee Bonus
+
+https://leetcode.com/problems/employee-bonus/description/
+
+with bonus_group as (
+    select empid, sum(bonus) bonus
+    from bonus
+    group by 1 
+)
+
+select name, bonus
+from employee e left join bonus_group b on e.empid=b.empid
+where bonus is null or bonus<1000
