@@ -1,0 +1,12 @@
+95. Queries Quality and Percentage
+
+https://leetcode.com/problems/queries-quality-and-percentage/description/
+
+select 
+    q.query_name, 
+    round(sum(rating/position)/count(1),2) quality,
+    coalesce(round(poor/count(1)*100,2),0) poor_query_percentage
+from queries q 
+    left join (select query_name, count(1) poor from queries where rating<3 group by query_name) a on q.query_name=a.query_name
+where q.query_name is not null
+group by 1
