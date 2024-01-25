@@ -1,0 +1,12 @@
+97. Immediate Food Delivery 2
+
+https://leetcode.com/problems/immediate-food-delivery-ii/description/
+
+with delivery_group as (
+    select customer_id,
+    if(min(order_date)=min(customer_pref_delivery_date), 1, 0) immediate_percentage
+    from delivery
+    group by 1
+)
+select round(avg(immediate_percentage)*100,2) immediate_percentage
+from delivery_group
