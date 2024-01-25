@@ -1,0 +1,12 @@
+96. Monthly Transactions 1
+
+https://leetcode.com/problems/monthly-transactions-i/description/
+
+with app as (
+    select id, country, state app_state, amount app_amount
+    from transactions
+    where state='approved'
+)
+select date_format(trans_date, '%Y-%m') month, t.country, count(state) trans_count, count(app_state) approved_count, sum(amount) trans_total_amount, coalesce(sum(app_amount),0) approved_total_amount
+from transactions t left join app a on t.id=a.id
+group by 1,2
