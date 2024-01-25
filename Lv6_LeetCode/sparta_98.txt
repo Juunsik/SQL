@@ -1,0 +1,15 @@
+98. Game Play Analysis 4
+
+https://leetcode.com/problems/game-play-analysis-iv/description/
+
+with first_login as (
+    select player_id, min(event_date) event_date
+    from activity
+    group by 1
+), two_days as (
+    select a.player_id, a.event_date
+    from activity a left join first_login f on a.player_id=f.player_id
+    where a.event_date = date_add(f.event_date, interval 1 day)
+) 
+select coalesce(round(count(distinct t.player_id)/count(distinct f.player_id),2),0) fraction
+from first_login f join two_days t
