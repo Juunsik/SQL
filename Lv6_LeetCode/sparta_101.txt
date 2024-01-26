@@ -1,0 +1,13 @@
+101. Products Sales Analysis 3
+
+https://leetcode.com/problems/product-sales-analysis-iii/description/
+
+with first_year as (
+    select product_id, min(year)
+    from sales
+    group by product_id
+)
+
+select product_id, year first_year, quantity, price
+from sales
+where (product_id, year) in (select * from first_year)
