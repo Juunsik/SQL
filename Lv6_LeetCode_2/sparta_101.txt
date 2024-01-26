@@ -11,3 +11,16 @@ with first_year as (
 select product_id, year first_year, quantity, price
 from sales
 where (product_id, year) in (select * from first_year)
+
+---------------------------------------------------------
+
+with first_year as (
+    select product_id, min(year)
+    from sales
+    group by product_id
+)
+
+select product_id, year first_year, sum(quantity) quantity, sum(price) price
+from sales
+where (product_id, year) in (select * from first_year)
+group by 1, 2
