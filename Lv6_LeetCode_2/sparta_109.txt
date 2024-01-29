@@ -1,0 +1,12 @@
+109. Consecutive Numbers
+
+https://leetcode.com/problems/consecutive-numbers/
+
+with candidate as (
+    select n.id id, n.num num
+    from logs p join logs n on p.id+1=n.id
+    where p.num=n.num
+)
+select distinct n.num consecutiveNums
+from candidate p join candidate n on p.id+1=n.id
+where p.num=n.num
