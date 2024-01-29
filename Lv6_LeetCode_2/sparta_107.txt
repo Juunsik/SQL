@@ -1,0 +1,22 @@
+107. Primary Department for Each Employee
+
+https://leetcode.com/problems/primary-department-for-each-employee/description/
+
+with yes_employee as (
+    select *
+    from employee
+    where primary_flag='y'
+), no_employee as (
+    select *
+    from employee
+    group by 1
+    having count(1)=1
+)
+select employee_id, department_id
+from yes_employee
+union 
+select employee_id, department_id
+from no_employee
+
+
+
