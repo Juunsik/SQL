@@ -1,0 +1,6 @@
+108. Triangle Judgement
+
+https://leetcode.com/problems/triangle-judgement/description/
+
+select *, if(((x+y)>z) and ((x+z)>y) and ((y+z)>x), 'Yes', 'No') triangle
+from triangle
