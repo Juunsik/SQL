@@ -1,0 +1,18 @@
+110. Product Price at a Given Date
+
+https://leetcode.com/problems/product-price-at-a-given-date/?source=submission-ac
+
+with pro_id as (
+    select distinct product_id
+    from products
+), pre_date as (
+    select product_id, new_price
+    from products
+    where (product_id, change_date) in (
+        select product_id, max(change_date) date
+        from products
+        where change_date<='2019-08-16'
+        group by 1)
+)
+select i.product_id product_id, coalesce(new_price, 10) price
+from pro_id i left join pre_date d on i.product_id=d.product_id
