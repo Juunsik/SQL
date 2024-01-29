@@ -1,0 +1,15 @@
+106. The Number of Employees Which Report to Each Employee
+
+https://leetcode.com/problems/the-number-of-employees-which-report-to-each-employee/description/
+
+with manager as (
+    select reports_to, count(reports_to) reports_count, round(avg(age)) average_age
+    from employees
+    group by 1
+    having count(reports_to)>=1
+)
+select employee_id, name, reports_count, average_age
+from employees e inner join manager m on e.employee_id=m.reports_to
+where m.reports_to is not null
+order by 1
+
