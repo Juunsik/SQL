@@ -1,0 +1,13 @@
+113. Employees Whose Manager Left the Company
+
+https://leetcode.com/problems/employees-whose-manager-left-the-company/description/
+
+with candidate as (
+    select employee_id,manager_id
+    from employees
+    where salary<30000
+)
+select employee_id
+from candidate
+where manager_id not in (select employee_id from employees)
+order by 1
