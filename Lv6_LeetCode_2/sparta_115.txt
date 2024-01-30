@@ -1,0 +1,21 @@
+115. Movie Rating
+
+https://leetcode.com/problems/movie-rating/description/
+
+with user_result as (
+    select r.user_id, name
+    from movierating r inner join users u on r.user_id=u.user_id 
+    group by 1
+    order by count(1) desc, name
+    limit 1
+), movie_result as (
+    select r.movie_id, title
+    from movierating r inner join movies m on r.movie_id=m.movie_id
+    where date_format(created_at, '%Y-%m')='2020-02'
+    group by 1
+    order by avg(rating) desc, title
+    limit 1
+)
+select name results from user_result
+union all
+select title results from movie_result
