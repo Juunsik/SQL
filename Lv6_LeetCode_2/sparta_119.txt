@@ -1,0 +1,15 @@
+185. Department Top Three Salaries
+
+https://leetcode.com/problems/department-top-three-salaries/description/
+
+with total_table as (
+    select e.id, e.name name, salary, d.name department
+    from employee e inner join department d on e.departmentId=d.id
+), ranking as (
+    select *,
+        dense_rank() over(partition by department order by salary desc) salary_rank
+    from total_table
+)
+select department, name employee, salary
+from ranking
+where salary_rank<=3
