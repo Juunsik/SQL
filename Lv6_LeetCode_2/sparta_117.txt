@@ -1,0 +1,21 @@
+602. Friend Requests 2: Who Has the Most Firends
+
+https://leetcode.com/problems/friend-requests-ii-who-has-the-most-friends/description/
+
+with req as (
+    select requester_id id, count(1) num
+    from requestaccepted
+    group by 1
+), accep as (
+    select accepter_id id, count(1) num
+    from requestaccepted
+    group by 1
+)
+select id, sum(num) num
+from (
+    select * from req
+    union all
+    select * from accep) a
+group by 1
+order by 2 desc
+limit 1
