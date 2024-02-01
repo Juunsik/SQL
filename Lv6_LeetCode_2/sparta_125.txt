@@ -1,0 +1,13 @@
+1327. List the Products Ordered in a Period
+
+https://leetcode.com/problems/list-the-products-ordered-in-a-period/description/
+
+with months_total as (
+    select product_id, sum(unit) unit
+    from orders
+    where date_format(order_date, '%Y-%m')='2020-02'
+    group by 1
+)
+select product_name, unit
+from months_total m inner join products p on m.product_id=p.product_id
+where unit>=100
