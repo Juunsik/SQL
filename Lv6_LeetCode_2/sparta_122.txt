@@ -1,0 +1,13 @@
+196. Delete Duplicate Emails
+
+https://leetcode.com/problems/delete-duplicate-emails/description/
+
+delete from person
+where id not in (
+    select *
+    from(
+        select min(id) id
+        from person
+        group by email
+    ) a
+)
