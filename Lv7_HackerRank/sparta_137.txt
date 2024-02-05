@@ -1,0 +1,13 @@
+137. Weather Observation Station 5
+
+https://www.hackerrank.com/challenges/weather-observation-station-5/problem?isFullScreen=true
+
+(select city, length(city)
+from station
+order by 2, 1
+LIMIT 1)
+union
+(select city, length(city)
+from station
+order by 2 desc, 1
+LIMIT 1)
