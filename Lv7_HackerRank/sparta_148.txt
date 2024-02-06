@@ -1,0 +1,12 @@
+148. Type of Triangle
+
+https://docs.google.com/spreadsheets/d/1TRBYs9WXz61xoW3ACeklombx8KZqaTekqwuCS5eyiIU/edit#gid=541709013
+
+select 
+    if(((a+b)>c) and ((a+c)>b) and ((b+c)>a), 
+       case
+        when a=b and b=c then 'Equilateral'
+        when a=b or a=c or b=c then 'Isosceles'
+        else 'Scalene'
+       end , 'Not A Triangle') triangle
+from triangles
