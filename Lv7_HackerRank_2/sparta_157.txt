@@ -1,0 +1,9 @@
+157. Top Earners
+
+https://www.hackerrank.com/challenges/earnings-of-employees/problem?isFullScreen=true
+
+select months*salary, count(months*salary)
+from employee
+group by months*salary
+order by 1 desc
+limit 1
