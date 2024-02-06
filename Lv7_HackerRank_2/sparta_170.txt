@@ -1,0 +1,11 @@
+170. Weather Observation Station 20
+
+https://www.hackerrank.com/challenges/weather-observation-station-20/problem?isFullScreen=true
+
+with percent as (
+    select lat_n, percent_rank() over(order by lat_n) percent_lat_n
+    from station
+)
+select round(lat_n,4)
+from percent
+where percent_lat_n=0.5
