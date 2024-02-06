@@ -1,0 +1,18 @@
+168. Binary Tree Nodes
+
+https://www.hackerrank.com/challenges/binary-search-tree-1/problem?isFullScreen=true
+
+with group_p as (
+    select p
+    from bst
+    where p is not null and p not in (select n from bst where p is null)
+    group by 1
+)
+select n,
+    case 
+        when p is null then 'Root'
+        when n in (select * from group_p) then 'Inner'
+        else 'Leaf'
+    end
+from bst
+order by 1
