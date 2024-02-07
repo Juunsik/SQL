@@ -1,0 +1,14 @@
+173. Ollivander's Inventory
+
+https://www.hackerrank.com/challenges/harry-potter-and-wands/problem?isFullScreen=true
+
+
+select w.id, p.age, w.coins_needed, w.power
+from wands w inner join wands_property p on w.code=p.code
+    inner join (select age, power, min(coins_needed) min_coins_needed
+                from wands w inner join wands_property p on w.code=p.code
+                where is_evil=0
+                group by age, power) m 
+    on w.coins_needed=m.min_coins_needed and p.age=m.age and w.power=m.power
+where is_evil=0 
+order by power desc, age desc
