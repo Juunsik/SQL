@@ -1,0 +1,26 @@
+178. Symmetric Pairs
+
+https://www.hackerrank.com/challenges/symmetric-pairs/problem?isFullScreen=true
+
+select x,y
+from (
+    select x,y, percent_rank() over(order by x) percent
+    from ((select x,y
+        from functions
+        where x=y
+        group by x, y
+        having count(1)>1)
+        union
+        (select x, y
+        from (
+            select x, y from functions
+            union all
+            select y x, x y from functions
+        ) a
+        where x!=y
+        group by x, y
+        having count(1)>1)) b
+    order by x
+    ) c
+where percent<=0.5
+
