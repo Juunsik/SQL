@@ -1,0 +1,13 @@
+175. Contest Leaderboard
+
+https://www.hackerrank.com/challenges/contest-leaderboard/problem?isFullScreen=true
+
+select hacker_id, name, sum(score) score
+from (
+    select h.hacker_id, name, challenge_id, max(score) score
+    from hackers h inner join submissions s on h.hacker_id=s.hacker_id
+    group by hacker_id, name, challenge_id
+    having max(score)>0
+) a
+group by hacker_id, name
+order by 3 desc, 1
