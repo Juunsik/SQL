@@ -1,0 +1,16 @@
+176. SQL Project Planning
+
+https://www.hackerrank.com/challenges/sql-projects/problem?isFullScreen=true
+
+with s_date as (
+    select start_date, dense_rank() over(order by start_date) day
+    from projects
+    where start_date not in (select end_date from projects)
+), e_date as (
+    select end_date, dense_rank() over(order by end_date) day
+    from projects
+    where end_date not in (select start_date from projects)
+)
+select start_date, end_date
+from s_date s inner join e_date e on s.day=e.day
+order by end_date-start_date, start_date
