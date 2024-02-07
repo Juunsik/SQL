@@ -1,0 +1,10 @@
+171. The Report
+
+https://www.hackerrank.com/challenges/the-report/problem?isFullScreen=true
+
+with output as (
+    select if(grade<8,null,name) name, grade, marks
+    from grades g inner join students s on marks between min_mark and max_mark
+    order by 2 desc
+)
+select * from output order by grade desc, if(grade>=8, name, marks)
