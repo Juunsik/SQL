@@ -1,0 +1,21 @@
+174. Challenges
+
+https://www.hackerrank.com/challenges/challenges/problem?isFullScreen=true
+
+select h.hacker_id, name, count(challenge_id) cnt
+from challenges c inner join hackers h on c.hacker_id=h.hacker_id
+group by hacker_id, name
+having count(challenge_id) not in (
+    select cnt
+    from (select h.hacker_id, name, count(challenge_id) cnt
+        from challenges c inner join hackers h on c.hacker_id=h.hacker_id
+        group by hacker_id, name) a
+    where cnt not in (select max(cnt) 
+                      from (select h.hacker_id, name, count(challenge_id) cnt
+                            from challenges c inner join hackers h on c.hacker_id=h.hacker_id
+                            group by hacker_id, name)b)
+    group by cnt
+    having count(cnt)>1 
+    order by cnt desc
+)
+order by count(challenge_id) desc, hacker_id
