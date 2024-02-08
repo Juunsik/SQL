@@ -1,0 +1,13 @@
+179. Interviews
+
+https://www.hackerrank.com/challenges/interviews/problem?isFullScreen=true
+
+select con.contest_id, hacker_id, name, sum(total_submissions), sum(total_accepted_submissions), sum(total_views), sum(total_unique_views)
+from 
+    contests con inner join colleges col on con.contest_id = col.contest_id
+    inner join challenges chal on col.college_id=chal.college_id
+    left join (select challenge_id, sum(total_views) total_views, sum(total_unique_views) total_unique_views from view_stats group by challenge_id) v on chal.challenge_id=v.challenge_id
+    left join (select challenge_id, sum(total_submissions) total_submissions, sum(total_accepted_submissions) total_accepted_submissions from submission_stats group by challenge_id) s on chal.challenge_id=s.challenge_id
+group by con.contest_id, hacker_id, name
+having not (sum(total_submissions)=0 and sum(total_accepted_submissions)=0 and sum(total_views)=0 and sum(total_unique_views)=0)
+order by con.contest_id
