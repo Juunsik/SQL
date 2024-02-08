@@ -1,0 +1,19 @@
+183. Print Prime Numbers
+
+https://www.hackerrank.com/challenges/print-prime-numbers/problem?isFullScreen=true
+
+with recursive numbers as (
+    select 2 num
+    union all
+    select num+1
+    from numbers
+    where num<1000
+), Not_Frime as (
+    select distinct n1.num
+    from numbers n1 left join numbers n2 on n1.num>n2.num
+    where mod(n1.num,n2.num)=0
+    order by n1.num
+)
+select group_concat(num separator '&')
+from numbers
+where num not in (select * from Not_Frime)
