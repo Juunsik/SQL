@@ -1,0 +1,12 @@
+182. Draw The Triangle 2
+
+https://www.hackerrank.com/challenges/draw-the-triangle-2/problem?isFullScreen=true
+
+with recursive cte as (
+    select 1 star
+    union all
+    select star+1 stars
+    from cte
+    where star<20
+)
+select repeat('* ',star) from cte
